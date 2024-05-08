@@ -1,0 +1,17 @@
+{
+  "dados": {
+    "condition": "Sol",
+    "date": "2024-05-08 15:33:55",
+    "humidity": 39,
+    "icon": "1",
+    "pressure": 1012,
+    "sensation": 31,
+    "temperature": 31,
+    "wind_direction": "W",
+    "wind_velocity": 6
+  },
+  "estado": "SP",
+  "id": 4371,
+  "nome": "Bebedouro",
+  "pais": "BR"
+}
