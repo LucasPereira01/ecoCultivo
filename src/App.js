@@ -1,36 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import * as api from './api/climaTempo.js';
-import DataCity from './components/DataCity.js';
 import Heade from './components/Heade.js';
 import Footer from './components/Footer.js';
+import TemAndClima from './components/TemAndClima.js';
+import ModalData from './components/ModalData.js';
+import Preloader from './components/Preloader.js';
 
 export default function App() {
-  const [dataOfClim, setDataOfClim] = useState([]);
+  const [dataOfClim, setDataOfClim] = useState(null); // Inicialmente, nenhum dado está disponível
+  const [isEstufaModalOpen, setIsEstufaModalOpen] = useState(false);
+  const [isClimaModalOpen, setIsClimaModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Adiciona um estado de carregamento
 
   useEffect(() => {
     const fetchDadosClimaTempo = async () => {
-      const data = await api.getStatusCidade();
-      console.log(data);
-      setDataOfClim(data);
+      try {
+        const data = await api.getStatusCidade();
+        console.log(data);
+        setDataOfClim(data);
+        setIsLoading(false); // Marca o carregamento como concluído quando os dados estão disponíveis
+      } catch (error) {
+        console.error('Erro ao obter os dados do clima:', error);
+        setIsLoading(false); // Marca o carregamento como concluído em caso de erro
+      }
     };
 
-    fetchDadosClimaTempo();
+    // Função para buscar os dados do clima inicialmente e a cada 30 minutos
+    const fetchData = async () => {
+      await fetchDadosClimaTempo();
+      setTimeout(fetchData, 30 * 60 * 1000); // Executa a função a cada 30 minutos (30 * 60 * 1000 milissegundos)
+    };
+
+    fetchData();
   }, []); // Executa uma vez, quando o componente é montado
 
-  let isTemp = false;
+  const handleDataEstufa = () => {
+    setIsEstufaModalOpen(true);
+  };
+  const handleDataClima = () => {
+    setIsClimaModalOpen(true);
+  };
+
+  // Verifica se os dados ainda estão carregando
+  if (isLoading) {
+    return <Preloader />; // Mostra um indicador de carregamento enquanto os dados estão sendo carregados
+  }
 
   return (
     <div>
       <Heade />
-      <div className="center">
-        <img
-          src="./estufa.jpg"
-          alt="Estufa"
-          style={{ width: '100%', alignItems: 'center' }}
-        />
-      </div>
-
-      {isTemp === true && <DataCity data={dataOfClim} />}
+      <TemAndClima
+        handleDataEstufa={handleDataEstufa}
+        handleDataClima={handleDataClima}
+      />
+      <ModalData
+        isEstufaModalOpen={isEstufaModalOpen}
+        isClimaModalOpen={isClimaModalOpen}
+        setIsEstufaModalOpen={setIsEstufaModalOpen}
+        setIsClimaModalOpen={setIsClimaModalOpen}
+        dataOfClim={dataOfClim}
+      />
 
       <Footer />
     </div>

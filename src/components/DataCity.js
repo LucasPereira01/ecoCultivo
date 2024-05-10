@@ -14,7 +14,7 @@ export default function DataCity({ data }) {
     >
       <div className="card" style={{ borderRadius: '10px' }}>
         <div className="card-image waves-effect waves-block waves-light">
-          <img className="activator" src="frio.jpg" />
+          <img className="activator" src="frio.jpg" alt="frio" />
         </div>
         <div className="card-content">
           <span className="card-title activator grey-text text-darken-4">
