@@ -2,12 +2,11 @@ import React from 'react';
 import { getConditionIcon } from '../helper/iconesTempo.js';
 import Preloader from './Preloader.js';
 
-export default function ModalEstufa({
-  closeModal,
-  modalRefClima,
-  dataOfClim,
-  fetchDadosClimaTempo,
-}) {
+export default function ModalEstufa({ closeModal, modalRefClima, dataOfClim }) {
+  // Verifica se os dados foram fornecidos antes de tentar acessá-los
+  if (!dataOfClim || !dataOfClim.dados) {
+    return null; // Ou renderize algo mais informativo, como uma mensagem ou componente de carregamento
+  }
   const { nome, estado, pais, dados } = dataOfClim;
 
   return (
