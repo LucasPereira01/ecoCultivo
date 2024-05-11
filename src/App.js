@@ -7,7 +7,7 @@ import ModalData from './components/ModalData.js';
 import Preloader from './components/Preloader.js';
 
 export default function App() {
-  const [dataOfClim, setDataOfClim] = useState(null); // Inicialmente, nenhum dado está disponível
+  const [dataOfClim, setDataOfClim] = useState({}); // Inicialmente, nenhum dado está disponível
   const [isEstufaModalOpen, setIsEstufaModalOpen] = useState(false);
   const [isClimaModalOpen, setIsClimaModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Adiciona um estado de carregamento
@@ -21,7 +21,6 @@ export default function App() {
         setIsLoading(false); // Marca o carregamento como concluído quando os dados estão disponíveis
       } catch (error) {
         console.error('Erro ao obter os dados do clima:', error);
-        setIsLoading(false); // Marca o carregamento como concluído em caso de erro
       }
     };
 
@@ -41,10 +40,7 @@ export default function App() {
     setIsClimaModalOpen(true);
   };
 
-  // Verifica se os dados ainda estão carregando
-  if (isLoading) {
-    return <Preloader />; // Mostra um indicador de carregamento enquanto os dados estão sendo carregados
-  }
+
 
   return (
     <div>
@@ -53,13 +49,14 @@ export default function App() {
         handleDataEstufa={handleDataEstufa}
         handleDataClima={handleDataClima}
       />
-      <ModalData
+      {isLoading || dataOfClim ===  null ? <Preloader />:<ModalData
         isEstufaModalOpen={isEstufaModalOpen}
         isClimaModalOpen={isClimaModalOpen}
         setIsEstufaModalOpen={setIsEstufaModalOpen}
         setIsClimaModalOpen={setIsClimaModalOpen}
         dataOfClim={dataOfClim}
-      />
+      />}
+      
 
       <Footer />
     </div>

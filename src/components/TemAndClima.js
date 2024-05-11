@@ -46,7 +46,7 @@ export default function TemAndClima({ handleDataClima, handleDataEstufa }) {
 const styles = {
   cardImage: {
     width: '100%',
-    height: '350px' /* ou qualquer altura desejada */,
+    height: '320px' /* ou qualquer altura desejada */,
   },
   cardImageContent: {
     width: '100%',
