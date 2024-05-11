@@ -1,4 +1,8 @@
 import axios from 'axios'
+import  data from '../data.json'
+
+
+
 async function getStatusCidade() {
     try {
         const url = 'http://apiadvisor.climatempo.com.br/api/v1/weather/locale/4371/current?token=6fb01449a637457ea38b3f0d9aa9879f';
@@ -12,7 +16,7 @@ async function getStatusCidade() {
     } catch (erro) {
         // Lidar com erros
         console.error('Erro ao obter o estado do clima:', erro);
-        return null; // Ou tratar o erro de outra forma
+        return data; // Ou tratar o erro de outra forma
     }
 }
 export {getStatusCidade} ;
