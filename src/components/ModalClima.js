@@ -3,11 +3,11 @@ import { getConditionIcon } from '../helper/iconesTempo.js';
 import Preloader from './Preloader.js';
 
 export default function ModalEstufa({ closeModal, modalRefClima, dataOfClim }) {
-  // Verifica se os dados foram fornecidos antes de tentar acessá-los
-  if (!dataOfClim || !dataOfClim.dados) {
+  // Verifica se os data foram fornecidos antes de tentar acessá-los
+  if (!dataOfClim || !dataOfClim.data) {
     return null; // Ou renderize algo mais informativo, como uma mensagem ou componente de carregamento
   }
-  const { nome, estado, pais, dados } = dataOfClim;
+  const { name, state, country, data } = dataOfClim;
 
   return (
     <div>
@@ -26,21 +26,21 @@ export default function ModalEstufa({ closeModal, modalRefClima, dataOfClim }) {
               >
                 <p>
                   <strong>
-                    Clima: {getConditionIcon(dados.icon)} {dados.condition}
+                    Clima: {getConditionIcon(data.icon)} {data.condition}
                   </strong>
                 </p>
                 <p>
-                  <strong>Temperatura: {dados.temperature}°C </strong>
+                  <strong>Temperatura: {data.temperature}°C </strong>
                 </p>
                 <p>
                   <strong>
-                    Vento: {dados.wind_velocity}km/h, direção:{' '}
-                    {dados.wind_direction}
+                    Vento: {data.wind_velocity}km/h, direção:{' '}
+                    {data.wind_direction}
                   </strong>
                 </p>
                 <p>
                   <strong>
-                    Localização: {nome}, {estado}, {pais}
+                    Localização: {name}, {state}, {country}
                   </strong>
                 </p>
               </div>
