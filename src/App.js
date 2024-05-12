@@ -14,7 +14,7 @@ export default function App() {
   useEffect(() => {
     const fetchDadosClimaTempo = async () => {
       try {
-        const response = await fetch('http://apiadvisor.climatempo.com.br/api/v1/weather/locale/4371/current?token=6fb01449a637457ea38b3f0d9aa9879f');
+        const response = await fetch('https://apiadvisor.climatempo.com.br/api/v1/weather/locale/4371/current?token=6fb01449a637457ea38b3f0d9aa9879f');
         
         if (!response.ok) {
           throw new Error('Erro ao obter os dados do clima');
