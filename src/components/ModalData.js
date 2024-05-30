@@ -9,6 +9,7 @@ export default function BannerModal({
   setIsEstufaModalOpen,
   setIsClimaModalOpen,
   dataOfClim,
+  dataOfEstufa,
 }) {
   const modalRefEstufa = useRef(null);
   const modalRefClima = useRef(null);
@@ -46,7 +47,7 @@ export default function BannerModal({
 
   return (
     <div>
-      <ModalEstufa modalRefEstufa={modalRefEstufa} closeModal={closeModal} />
+      <ModalEstufa modalRefEstufa={modalRefEstufa} closeModal={closeModal} dataOfEstufa={dataOfEstufa}/>
       <ModalClima
         modalRefClima={modalRefClima}
         closeModal={closeModal}

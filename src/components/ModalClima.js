@@ -43,6 +43,11 @@ export default function ModalEstufa({ closeModal, modalRefClima, dataOfClim }) {
                     Localização: {name}, {state}, {country}
                   </strong>
                 </p>
+                <p>
+                  <strong>
+                    Dia: {data.date}
+                  </strong>
+                </p>
               </div>
             </div>
           </div>

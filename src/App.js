@@ -10,6 +10,29 @@ export default function App() {
   const [isEstufaModalOpen, setIsEstufaModalOpen] = useState(false);
   const [isClimaModalOpen, setIsClimaModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [dataOfEstufa, setDataOfEstufa] = useState({})
+
+  useEffect(()=>{
+    const fetchDadosEstufa = async() =>{
+      try {
+        const response = await fetch('http://localhost:3001/dados')
+        if (!response.ok) {
+          throw new Error('Erro ao obter os dados do clima');
+        }
+        const data = await response.json();
+        setDataOfEstufa(data);
+      } catch (error) {
+        console.error('Erro ao obter os dados da Estufa:', error);
+      }
+    }
+    const fetchData = async () => {
+      await fetchDadosEstufa();
+      setTimeout(fetchData, 5000);
+    };
+
+    fetchData();
+
+  },[])
 
   useEffect(() => {
     const fetchDadosClimaTempo = async () => {
@@ -55,6 +78,7 @@ export default function App() {
         setIsEstufaModalOpen={setIsEstufaModalOpen}
         setIsClimaModalOpen={setIsClimaModalOpen}
         dataOfClim={dataOfClim}
+        dataOfEstufa={dataOfEstufa}
       />}
 
       <Footer />
